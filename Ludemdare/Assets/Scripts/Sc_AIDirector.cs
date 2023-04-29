@@ -72,7 +72,7 @@ public class Sc_AIDirector : MonoBehaviour
             posToSpawn = Random.Range(0, 1);
             Transform location = spawnLocations[posToSpawn + 8];
             //Debug.Log(posToSpawn + 8);
-            Instantiate(enemyOptions[0], location);
+            Instantiate(enemyOptions[0], location.position, Quaternion.identity);
         }
         yield return null;
     }

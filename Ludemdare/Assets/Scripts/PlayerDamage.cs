@@ -23,24 +23,16 @@ public class PlayerDamage : MonoBehaviour
        
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void PlayerHit()
     {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            Destroy(collision.gameObject);
-            Debug.Log("10 points");
-            StartCoroutine(HitEnemy());
-           
-        }
+        StartCoroutine(PlayerHitCoroutine());
     }
 
-    IEnumerator HitEnemy() {
+    IEnumerator PlayerHitCoroutine() {
         float move_Speed = playerMovement.move_Speed;
         playerMovement.move_Speed = 8;
         yield return new WaitForSeconds(1.5f);
         playerMovement.move_Speed = 15;
         yield return null;
-
     }
-
 }
