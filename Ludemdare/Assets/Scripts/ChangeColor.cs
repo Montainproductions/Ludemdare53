@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class ChangeColor : MonoBehaviour
 {
     private Renderer rend;
     private Color newColour = Color.red;
@@ -16,19 +16,19 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            StartCoroutine(ChangeColor());
+            StartCoroutine(ChangeColors());
 
         }
     }
 
-    IEnumerator ChangeColor()
+    IEnumerator ChangeColors()
     {
         rend.material.color = newColour;
         yield return new WaitForSeconds(0.5f);
