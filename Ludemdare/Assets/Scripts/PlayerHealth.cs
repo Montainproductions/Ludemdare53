@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public static float playerLives = 3f;
+    public float playerLives = 3f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("Lives: " + playerLives);
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Lives: " + playerLives);
         if (playerLives == 0f) 
         {
             Debug.Log("Game Over");

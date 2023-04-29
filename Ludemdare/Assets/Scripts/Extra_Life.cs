@@ -7,8 +7,8 @@ using UnityEngine;
 public class Extra_Life : PowerUpEffect
 {
     public float num_lives = 1f;
-    public override void Apply(GameObject target) 
-    { 
-        target.GetComponent<Extra_Life>().num_lives += num_lives;
+    public override void Apply(GameObject target)
+    {
+        target.GetComponent<PlayerHealth>().playerLives += num_lives;
     }
 }
