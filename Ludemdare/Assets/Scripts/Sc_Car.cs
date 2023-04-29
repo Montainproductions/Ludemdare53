@@ -42,9 +42,9 @@ public class Sc_Car : MonoBehaviour
         playerDistance = Vector2.Distance(player.transform.position, gameObject.transform.position);
         angleDifference = Vector2.Angle(player.transform.position, gameObject.transform.position);
         Debug.Log("Player Distance: " + playerDistance);
-        Debug.Log("Player Angle: " + angleDifference);
+        //Debug.Log("Player Angle: " + angleDifference);
 
-        if (playerDistance < 0.5f && angleDifference < 30 && notStartedCrash)
+        if (playerDistance < 5f && angleDifference < 30 && notStartedCrash)
         {
             InitiializeCrash();
         }
@@ -55,12 +55,20 @@ public class Sc_Car : MonoBehaviour
         }
         else
         {
-            transform.Translate(toLocation.position * speed * Time.deltaTime);
+            if (Vector2.Distance(toLocation.position, gameObject.transform.position) < 0.5f) 
+            { 
+                Crash(); 
+            }
+            else
+            {
+                transform.Translate(toLocation.position * speed * 2 * Time.deltaTime);
+            }
         }
     }
 
     public void InitiializeCrash()
     {
+        Debug.Log("Starting Crash");
         rotationRoute = Instantiate(rotate[0]);
         movingForward = false;
         notStartedCrash = false;
@@ -79,6 +87,10 @@ public class Sc_Car : MonoBehaviour
         if(collision.tag == "Otherside")
         {
             Destroy(gameObject);
+        }
+        if (collision.tag == "Enemy")
+        {
+
         }
     }
 }
