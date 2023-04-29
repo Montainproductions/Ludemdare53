@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PowerUPs/Extra_Life")]
+[CreateAssetMenu(menuName = "PowerUps/Extra_Life")]
 public class Extra_Life : PowerUpEffect
 {
     public float num_lives = 1f;

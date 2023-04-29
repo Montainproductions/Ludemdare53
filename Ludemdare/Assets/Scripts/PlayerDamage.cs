@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerMove playerMovement;
+
     private Rigidbody2D enemy_body;
     private Rigidbody2D body;
 
@@ -32,10 +35,10 @@ public class PlayerDamage : MonoBehaviour
     }
 
     IEnumerator HitEnemy() {
-        float move_Speed = PlayerMove.move_Speed;
-        PlayerMove.move_Speed = 8;
+        float move_Speed = playerMovement.move_Speed;
+        playerMovement.move_Speed = 8;
         yield return new WaitForSeconds(1.5f);
-        PlayerMove.move_Speed = 15;
+        playerMovement.move_Speed = 15;
         yield return null;
 
     }

@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour {
     private float moveLimiter = 0.7f;
 
 
-    public static float move_Speed;
+    public float move_Speed;
 
     // Start is called before the first frame update
     void Start()
@@ -40,9 +40,21 @@ public class PlayerMove : MonoBehaviour {
             //Debug.Log(horizontal);
             //Debug.Log(vertical);
         }
-
+        
  
 
         body.velocity = new Vector2(horizontal * move_Speed, vertical * move_Speed);
+    }
+
+    public void tempSpeedBoostMethod() 
+    {
+        StartCoroutine(tempSpeedBoost());
+    }
+
+    IEnumerator tempSpeedBoost() 
+    {
+        yield return new WaitForSeconds(3f);
+        move_Speed = 15;
+        yield return null;
     }
 }
