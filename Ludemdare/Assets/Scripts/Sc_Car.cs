@@ -55,13 +55,13 @@ public class Sc_Car : MonoBehaviour
         }
         else
         {
-            if (Vector2.Distance(toLocation.position, gameObject.transform.position) < 0.5f) 
+            if (Vector2.Distance(toLocation.position, gameObject.transform.position) < 0.5f && currentRoute < 4) 
             { 
                 Crash(); 
             }
             else
             {
-                transform.Translate(toLocation.position * speed * 2 * Time.deltaTime);
+                transform.Translate(toLocation.position * speed * Time.deltaTime);
             }
         }
     }
@@ -69,7 +69,7 @@ public class Sc_Car : MonoBehaviour
     public void InitiializeCrash()
     {
         Debug.Log("Starting Crash");
-        rotationRoute = Instantiate(rotate[0]);
+        rotationRoute = Instantiate(rotate[0], gameObject.transform.position, Quaternion.identity);
         movingForward = false;
         notStartedCrash = false;
         Crash();
