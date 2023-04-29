@@ -26,8 +26,8 @@ public class PlayerMove : MonoBehaviour {
         // Gives a value between -1 and 1
         horizontal = Input.GetAxis("Horizontal"); // -1 is left
         vertical = Input.GetAxis("Vertical"); // -1 is down
-        Debug.Log(horizontal);
-        Debug.Log(vertical);
+        //Debug.Log(horizontal);
+        //Debug.Log(vertical);
     }
 
     void FixedUpdate()
@@ -37,8 +37,8 @@ public class PlayerMove : MonoBehaviour {
             // limit movement speed diagonally, so you move at 70% speed
             horizontal *= moveLimiter;
             vertical *= moveLimiter;
-            Debug.Log(horizontal);
-            Debug.Log(vertical);
+            //Debug.Log(horizontal);
+            //Debug.Log(vertical);
         }
 
  

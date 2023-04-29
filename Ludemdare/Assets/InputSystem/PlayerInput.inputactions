@@ -1,0 +1,34 @@
+{
+    "name": "PlayerInput",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "5bfc2f58-0b57-4047-b7ae-9aa063ff2245",
+            "actions": [
+                {
+                    "name": "NewEnemy",
+                    "type": "Button",
+                    "id": "4c1e17d7-82e6-49cc-a695-0a8a32a95770",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5e73de48-bdb1-49e7-82a8-afeb392d0acb",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NewEnemy",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
