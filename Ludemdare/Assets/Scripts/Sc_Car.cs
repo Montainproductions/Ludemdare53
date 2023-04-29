@@ -69,7 +69,7 @@ public class Sc_Car : MonoBehaviour
     public void InitiializeCrash()
     {
         Debug.Log("Starting Crash");
-        rotationRoute = Instantiate(rotate[0], gameObject.transform.position, Quaternion.identity);
+        rotationRoute = Instantiate(rotate[0], gameObject.transform, true);
         movingForward = false;
         notStartedCrash = false;
         Crash();
@@ -84,14 +84,21 @@ public class Sc_Car : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Otherside")
+        //Debug.Log(collision);
+        //Debug.Log(collision.tag);
+
+        if (collision.tag == "Otherside")
         {
             Destroy(gameObject);
         }
-        if (collision.tag == "Player")
+        else if (collision.tag == "Player")
         {
             player.GetComponent<PlayerDamage>().PlayerHit();
             Destroy(gameObject);
+        }
+        else if(collision.tag == "Spawner")
+        {
+            Debug.Log("HitSpawner");
         }
     }
 }

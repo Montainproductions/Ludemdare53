@@ -17,6 +17,7 @@ public class Sc_AIDirector : MonoBehaviour
     private GameObject[] enemyOptions;
     [SerializeField]
     private Transform[] spawnLocations;
+
     private GameObject[] enemiesOnScreen, enemiesOffScreen;
 
     private void Awake()
@@ -35,44 +36,43 @@ public class Sc_AIDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(stressLevel < maxStressLevel)
-        {
-
-        }
     }
 
     IEnumerator SpawnEnemy()
     {
-        int enemyToSpawn = Random.Range(0, enemyOptions.Length);
-        int sideOfScreen = Random.Range(0, 3);
-        //0,1,2, 3,4,5, 6,7, 8,9
-        if(sideOfScreen == 0)
+        if (currentEnemies < maxEnemies)
         {
-            posToSpawn = Random.Range(0, 2);
-            Transform location = spawnLocations[posToSpawn];
-            //Debug.Log(posToSpawn);
-            Instantiate(enemyOptions[0], location);
-        }
-        else if(sideOfScreen == 1)
-        {
-            posToSpawn = Random.Range(0, 2);
-            Transform location = spawnLocations[posToSpawn + 4];
-            //Debug.Log(posToSpawn + 3);
-            Instantiate(enemyOptions[0], location);
-        }
-        else if (sideOfScreen == 2)
-        {
-            posToSpawn = Random.Range(0, 1);
-            Transform location = spawnLocations[posToSpawn + 6];
-            //Debug.Log(posToSpawn + 6);
-            Instantiate(enemyOptions[0], location);
-        }
-        else
-        {
-            posToSpawn = Random.Range(0, 1);
-            Transform location = spawnLocations[posToSpawn + 8];
-            //Debug.Log(posToSpawn + 8);
-            Instantiate(enemyOptions[0], location.position, Quaternion.identity);
+            currentEnemies++;
+            int sideOfScreen = Random.Range(0, 3);
+            //0,1,2, 3,4,5, 6,7, 8,9
+            if (sideOfScreen == 0)
+            {
+                posToSpawn = Random.Range(0, 2);
+                Transform location = spawnLocations[posToSpawn];
+                //Debug.Log(posToSpawn);
+                Instantiate(enemyOptions[0], location.position, location.rotation);
+            }
+            else if (sideOfScreen == 1)
+            {
+                posToSpawn = Random.Range(0, 2);
+                Transform location = spawnLocations[posToSpawn + 4];
+                //Debug.Log(posToSpawn + 3);
+                Instantiate(enemyOptions[0], location.position, location.rotation);
+            }
+            else if (sideOfScreen == 2)
+            {
+                posToSpawn = Random.Range(0, 1);
+                Transform location = spawnLocations[posToSpawn + 6];
+                //Debug.Log(posToSpawn + 6);
+                Instantiate(enemyOptions[0], location.position, location.rotation);
+            }
+            else
+            {
+                posToSpawn = Random.Range(0, 1);
+                Transform location = spawnLocations[posToSpawn + 8];
+                //Debug.Log(posToSpawn + 8);
+                Instantiate(enemyOptions[0], location.position, location.rotation);
+            }
         }
         yield return null;
     }

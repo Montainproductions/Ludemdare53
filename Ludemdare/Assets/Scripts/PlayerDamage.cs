@@ -11,10 +11,15 @@ public class PlayerDamage : MonoBehaviour
     private Rigidbody2D enemy_body;
     private Rigidbody2D body;
 
+    private Renderer rend;
+    private Color newColour = Color.red;
+    private Color oldColour = Color.white;
+
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        rend = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -25,6 +30,8 @@ public class PlayerDamage : MonoBehaviour
 
     public void PlayerHit()
     {
+        Debug.Log("Hello");
+        StartCoroutine(ChangeColors());
         StartCoroutine(PlayerHitCoroutine());
     }
 
@@ -33,6 +40,13 @@ public class PlayerDamage : MonoBehaviour
         playerMovement.move_Speed = 8;
         yield return new WaitForSeconds(1.5f);
         playerMovement.move_Speed = 15;
+        yield return null;
+    }
+    IEnumerator ChangeColors()
+    {
+        rend.material.color = newColour;
+        yield return new WaitForSeconds(0.5f);
+        rend.material.color = oldColour;
         yield return null;
     }
 }

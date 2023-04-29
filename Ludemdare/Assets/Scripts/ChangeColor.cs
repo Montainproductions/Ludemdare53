@@ -23,7 +23,7 @@ public class ChangeColor : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            StartCoroutine(ChangeColors());
+            //StartCoroutine(ChangeColors());
 
         }
     }
@@ -34,6 +34,5 @@ public class ChangeColor : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         rend.material.color = oldColour;
         yield return null;
-
     }
 }
