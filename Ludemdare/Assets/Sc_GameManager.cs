@@ -5,19 +5,19 @@ using UnityEngine;
 public class Sc_GameManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject tile;
+    private GameObject player, tile;
 
     [SerializeField]
-    private GameObject[] currentNodes;
+    private GameObject[] currentNodes, playerNodes;
 
     private GameObject[] appearedTiles = new GameObject[3];
 
-    private float tileDistance;
+    private float tileDistanceFront, tileDistanceBack;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(TileCheck());
+        StartCoroutine(SpawnTiles());
     }
 
     // Update is called once per frame
@@ -26,24 +26,32 @@ public class Sc_GameManager : MonoBehaviour
         
     }
 
+    IEnumerator SpawnTiles()
+    {
+        for (int i = 0; i < currentNodes.Length; i++)
+        {
+            Instantiate(tile, currentNodes[i].transform);
+        }
+        StartCoroutine(TileCheck());
+        yield return null;
+    }
+
     IEnumerator TileCheck()
     {
         for (int i = 0; i < currentNodes.Length; i++)
         {
-            if(appearedTiles[i] == null)
+            tileDistanceFront = Vector2.Distance(currentNodes[i].transform.position, playerNodes[3].transform.position);
+            tileDistanceBack = Vector2.Distance(currentNodes[i].transform.position, playerNodes[4].transform.position);
+            if (tileDistanceFront < 5)
             {
-                appearedTiles[i] = Instantiate(tile, currentNodes[i].transform);
+                currentNodes[i].transform.position = playerNodes[2].transform.position;
             }
-            else
+            if(tileDistanceBack < 5)
             {
-                tileDistance = Vector2.Distance(currentNodes[i].transform.position, appearedTiles[i].transform.position);
-                if (tileDistance > 12)
-                {
-                    appearedTiles[i] = null;
-                }
+                currentNodes[i].transform.position = playerNodes[0].transform.position;
             }
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.15f);
         StartCoroutine(TileCheck());
         yield return null;
     }
