@@ -856,7 +856,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2156419676661764044, guid: 8a25af7a204798d469293034fc604514, type: 3}
   m_PrefabInstance: {fileID: 6889311}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
 --- !u!1 &1567760987
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,8 +963,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789608812}
   m_CullTransparentMesh: 1
-=======
->>>>>>> 8c7cd967324716cb5c097e7538efb48bc1c688ee
 --- !u!1 &1799141737 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2156419677283371468, guid: 8a25af7a204798d469293034fc604514, type: 3}
@@ -1118,7 +1115,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1001 &2067390298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1277,5 +1273,3 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
-=======
->>>>>>> 8c7cd967324716cb5c097e7538efb48bc1c688ee
