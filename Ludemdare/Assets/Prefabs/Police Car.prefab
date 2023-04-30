@@ -205,5 +205,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc5e54f11459cf84cb8b6e121df49fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 5
   walkingLocation: {fileID: 5070375609464592735}

@@ -7,20 +7,15 @@ public class Sc_AIDirector : MonoBehaviour
 {
     public static Sc_AIDirector Instance { get; private set; }
 
-    //The player input system
-    private PlayerInput playerInputActions;
-
     [SerializeField]
-    private float maxStressLevel, maxEnemies;
-    private float stressLevel, currentEnemies;
+    private float maxEnemies;
+    private float currentEnemies;
     private int posToSpawn;
 
     [SerializeField]
     private GameObject[] enemyOptions;
     [SerializeField]
-    private Transform[] spawnLocations;
-
-    private GameObject[] enemiesOnScreen, enemiesOffScreen;
+    private GameObject[] spawnLocations;
 
     private void Awake()
     {
@@ -33,16 +28,13 @@ public class Sc_AIDirector : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
-
-        playerInputActions = new PlayerInput();
-        playerInputActions.Player.Enable();
-        playerInputActions.Player.NewEnemy.performed += SpawnEnemy_Preformed;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        stressLevel = 0;
+        currentEnemies = 0;
+        StartCoroutine(SpawnEnemy());
     }
 
     // Update is called once per frame
@@ -52,7 +44,6 @@ public class Sc_AIDirector : MonoBehaviour
 
     public void EnemyDeid()
     {
-        Debug.Log("EnemyDieing");
         currentEnemies--;
     }
 
@@ -61,62 +52,52 @@ public class Sc_AIDirector : MonoBehaviour
         if (currentEnemies < maxEnemies)
         {
             currentEnemies++;
-            int sideOfScreen = Random.Range(0, 3);
+            int sideOfScreen = Random.Range(0, 2);
+            Sc_SpawnerTimer spawnerTimer, oppositeTimer;
             //0,1,2, 3,4,5, 6,7, 8,9
             if (sideOfScreen == 0)
             {
                 posToSpawn = Random.Range(0, 2);
-                Transform location = spawnLocations[posToSpawn];
-                //Debug.Log(posToSpawn);
-                Instantiate(enemyOptions[0], location.position, location.rotation);
+                spawnerTimer = spawnLocations[posToSpawn].GetComponent<Sc_SpawnerTimer>();
+                oppositeTimer = spawnLocations[posToSpawn + 4].GetComponent<Sc_SpawnerTimer>();
+                if (!spawnerTimer.spawnerBeenUsed)
+                {
+                    Transform location = spawnLocations[posToSpawn].transform;
+                    StartCoroutine(spawnerTimer.SpawnerUsed());
+                    StartCoroutine(oppositeTimer.SpawnerUsed());
+                    //Debug.Log(posToSpawn);
+                    Instantiate(enemyOptions[0], location.position, location.rotation);
+                }
             }
             else if (sideOfScreen == 1)
             {
                 posToSpawn = Random.Range(0, 2);
-                Transform location = spawnLocations[posToSpawn + 4];
-                //Debug.Log(posToSpawn + 3);
-                Instantiate(enemyOptions[0], location.position, location.rotation);
+                spawnerTimer = spawnLocations[posToSpawn + 4].GetComponent<Sc_SpawnerTimer>();
+                oppositeTimer = spawnLocations[posToSpawn].GetComponent<Sc_SpawnerTimer>();
+                if (!spawnerTimer.spawnerBeenUsed)
+                {
+                    Transform location = spawnLocations[posToSpawn + 4].transform;
+                    StartCoroutine(spawnerTimer.SpawnerUsed());
+                    StartCoroutine(oppositeTimer.SpawnerUsed());
+                    //Debug.Log(posToSpawn + 3);
+                    Instantiate(enemyOptions[0], location.position, location.rotation);
+                }
             }
             else if (sideOfScreen == 2)
             {
                 posToSpawn = Random.Range(0, 1);
-                Transform location = spawnLocations[posToSpawn + 6];
-                //Debug.Log(posToSpawn + 6);
-                Instantiate(enemyOptions[0], location.position, location.rotation);
-            }
-            else
-            {
-                posToSpawn = Random.Range(0, 1);
-                Transform location = spawnLocations[posToSpawn + 8];
-                //Debug.Log(posToSpawn + 8);
-                Instantiate(enemyOptions[0], location.position, location.rotation);
+                spawnerTimer = spawnLocations[posToSpawn + 6].GetComponent<Sc_SpawnerTimer>();
+                if (!spawnerTimer.spawnerBeenUsed)
+                {
+                    Transform location = spawnLocations[posToSpawn + 6].transform;
+                    StartCoroutine(spawnerTimer.SpawnerUsed());
+                    //Debug.Log(posToSpawn + 6);
+                    Instantiate(enemyOptions[0], location.position, location.rotation);
+                }
             }
         }
+        yield return new WaitForSeconds(2);
+        StartCoroutine(SpawnEnemy());
         yield return null;
     }
-
-    public void SpawnEnemy_Preformed(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return;
-        StartCoroutine(SpawnEnemy());
-    }
 }
-
-class CarRoute
-{
-    private Transform[] setOfRoute;
-    private int currentDestinationint;
-    private Transform currentDestination;
-
-    public CarRoute(Transform[] route)
-    {
-        setOfRoute = new Transform[4];
-        setOfRoute = route;
-        currentDestinationint = 0;
-    }
-
-    public void RestartRoute()
-    {
-        currentDestinationint = 0;
-    }
-} 

@@ -78,16 +78,16 @@ public class Sc_GameManager : MonoBehaviour
         {
             tileDistanceFront = Vector2.Distance(currentNodes[i].transform.position, playerNodes[3].transform.position);
             tileDistanceBack = Vector2.Distance(currentNodes[i].transform.position, playerNodes[4].transform.position);
-            if (tileDistanceFront < 5)
+            if (tileDistanceFront < 10)
             {
                 currentNodes[i].transform.position = playerNodes[2].transform.position;
             }
-            if(tileDistanceBack < 5)
+            if(tileDistanceBack < 10)
             {
                 currentNodes[i].transform.position = playerNodes[0].transform.position;
             }
         }
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.01f);
         StartCoroutine(TileCheck());
         yield return null;
     }
