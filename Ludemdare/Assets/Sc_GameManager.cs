@@ -13,6 +13,8 @@ public class Sc_GameManager : MonoBehaviour
     private float maxTimeInLevel;
     private float currentLevelTimer;
 
+    private float levelTime;
+
     [SerializeField]
     private GameObject player, tile;
 
@@ -48,6 +50,12 @@ public class Sc_GameManager : MonoBehaviour
     {
     }
 
+    public void SpawnTile()
+    {
+        GameObject newTile = Instantiate(tile, currentNodes[0].transform);
+        newTile.GetComponent<Sc_Tile>().walkingLocation = currentNodes[1].transform;
+    }
+
     public void StartGame()
     {
         currentScene++;
@@ -57,7 +65,8 @@ public class Sc_GameManager : MonoBehaviour
 
     IEnumerator StartLevelTimer()
     {
-        yield return new WaitForSeconds(maxTimeInLevel + (15 * currentScene));
+        levelTime = maxTimeInLevel + (15 * currentScene);
+        yield return new WaitForSeconds(levelTime);
         StartCoroutine(EndOfLevel());
         yield return null;
     }
