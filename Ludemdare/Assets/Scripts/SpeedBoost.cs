@@ -11,7 +11,10 @@ public class SpeedBoost : PowerUpEffect
     public float boost_duration;
     public override void Apply(GameObject target)
     {
-        target.GetComponent<PlayerMove>().move_Speed += boost_Amount;
-        target.GetComponent<PlayerMove>().tempSpeedBoostMethod();
+        if (target.tag == "Player")
+        {
+            target.GetComponent<PlayerMove>().move_Speed += boost_Amount;
+            target.GetComponent<PlayerMove>().tempSpeedBoostMethod();
+        }
     }
 }

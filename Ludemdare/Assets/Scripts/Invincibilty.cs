@@ -7,6 +7,6 @@ public class Invincibilty : PowerUpEffect
 {
     public override void Apply(GameObject target)
     {
-        target.GetComponent<PlayerInvincibility>().InvincEnabled();
+        target.GetComponent<PlayerInvincibility>();
     }
 }

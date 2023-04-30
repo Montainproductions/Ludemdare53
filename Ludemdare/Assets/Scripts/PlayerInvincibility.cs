@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerInvincibility : MonoBehaviour
 {
-    private bool invincibleEnabled;
+    private bool invincibleEnabled = false;
+    [SerializeField]
+    private float invincDuration = 3.0f;
     // Start is called before the first frame update
  
 
@@ -12,10 +14,9 @@ public class PlayerInvincibility : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy")) 
         {
-            if (invincibleEnabled == false) 
+            if (invincibleEnabled == true) 
             {
-                //Destroy(gameObject);
-                Debug.Log("H");
+                Destroy(collision.gameObject);
             }
         }
     }
@@ -28,7 +29,7 @@ public class PlayerInvincibility : MonoBehaviour
 
     IEnumerator InvincDisableRoutine() 
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(invincDuration);
         invincibleEnabled = false;
         yield return null;
     }

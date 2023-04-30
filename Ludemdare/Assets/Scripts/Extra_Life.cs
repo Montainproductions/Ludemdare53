@@ -9,6 +9,9 @@ public class Extra_Life : PowerUpEffect
     public float num_lives = 1f;
     public override void Apply(GameObject target)
     {
-        target.GetComponent<PlayerDamage>().playerLives += num_lives;
+        if (target.tag == "Player")
+        {
+            target.GetComponent<PlayerDamage>().playerLives += num_lives;
+        }
     }
 }
