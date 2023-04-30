@@ -15,8 +15,10 @@ public class Sc_GameManager : MonoBehaviour
 
     private float levelTime;
 
+    private GameObject player;
+
     [SerializeField]
-    private GameObject player, tile;
+    private GameObject tile;
 
     [SerializeField]
     private GameObject[] currentNodes;
@@ -60,6 +62,7 @@ public class Sc_GameManager : MonoBehaviour
     {
         currentScene++;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentScene);
+        player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(StartLevelTimer());
     }
 
