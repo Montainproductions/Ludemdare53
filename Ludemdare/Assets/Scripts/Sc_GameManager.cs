@@ -17,12 +17,6 @@ public class Sc_GameManager : MonoBehaviour
 
     private GameObject player;
 
-    [SerializeField]
-    private GameObject tile;
-
-    [SerializeField]
-    private GameObject[] currentNodes;
-
     private GameObject[] appearedTiles = new GameObject[3];
 
     private float tileDistanceFront, tileDistanceBack;
@@ -44,18 +38,11 @@ public class Sc_GameManager : MonoBehaviour
     void Start()
     {
         currentScene = 0;
-        SpawnTile();
     }
 
     // Update is called once per frame
     void Update()
     {
-    }
-
-    public void SpawnTile()
-    {
-        GameObject newTile = Instantiate(tile, currentNodes[0].transform);
-        newTile.GetComponent<Sc_Tile>().walkingLocation = currentNodes[1].transform;
     }
 
     public void StartGame()
@@ -64,6 +51,11 @@ public class Sc_GameManager : MonoBehaviour
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentScene);
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(StartLevelTimer());
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     IEnumerator StartLevelTimer()
