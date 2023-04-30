@@ -84,7 +84,7 @@ public class Sc_Car : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log(collision);
+        //ebug.Log(collision);
         //Debug.Log(collision.tag);
 
         if (collision.tag == "Otherside")

@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Sc_AIDirector : MonoBehaviour
 {
+    public static Sc_AIDirector Instance { get; private set; }
+
     //The player input system
     private PlayerInput playerInputActions;
 
@@ -22,6 +24,16 @@ public class Sc_AIDirector : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+
         playerInputActions = new PlayerInput();
         playerInputActions.Player.Enable();
         playerInputActions.Player.NewEnemy.performed += SpawnEnemy_Preformed;
@@ -36,6 +48,12 @@ public class Sc_AIDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public void EnemyDeid()
+    {
+        Debug.Log("EnemyDieing");
+        currentEnemies--;
     }
 
     IEnumerator SpawnEnemy()
