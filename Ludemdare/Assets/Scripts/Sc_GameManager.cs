@@ -42,7 +42,7 @@ public class Sc_GameManager : MonoBehaviour
     void Start()
     {
         currentScene = 0;
-        SpawnTile();
+        StartCoroutine(SpawnTile());
     }
 
     // Update is called once per frame
@@ -50,10 +50,13 @@ public class Sc_GameManager : MonoBehaviour
     {
     }
 
-    public void SpawnTile()
+    public IEnumerator SpawnTile()
     {
         GameObject newTile = Instantiate(tile, currentNodes[0].transform);
         newTile.GetComponent<Sc_Tile>().walkingLocation = currentNodes[1].transform;
+        yield return new WaitForSeconds(3);
+        SpawnTile();
+        yield return null;
     }
 
     public void StartGame()
