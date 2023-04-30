@@ -19,7 +19,7 @@ public class Sc_Tile : MonoBehaviour
         }
         else
         {
-            StartCoroutine(Sc_GameManager.Instance.SpawnTile());
+            Sc_GameManager.Instance.SpawnTile();
             Destroy(gameObject);
         }
     }
