@@ -8,25 +8,25 @@ public class PlayerDamage : MonoBehaviour
     [SerializeField]
     private PlayerMove playerMovement;
 
-    private Rigidbody2D enemy_body;
-    private Rigidbody2D body;
-
+    [SerializeField]
     private Renderer rend;
     private Color newColour = Color.red;
     private Color oldColour = Color.white;
 
-    public float playerLives = 3f;
+    public bool recentlyHit;
+
+    public int playerLives;
     // Start is called before the first frame update
     void Start()
     {
-        body = GetComponent<Rigidbody2D>();
-        rend = GetComponent<Renderer>();
+        UIManager.instance.ChangeLives(playerLives);
+        recentlyHit = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerLives == 0f)
+        if (playerLives <= 0f)
         {
             Debug.Log("Game Over");
         }
@@ -34,15 +34,27 @@ public class PlayerDamage : MonoBehaviour
 
     public void PlayerHit()
     {
-        Debug.Log("Hello");
-        StartCoroutine(ChangeColors());
-        StartCoroutine(PlayerHitCoroutine());
+        if (!recentlyHit)
+        {
+            recentlyHit = true;
+            StartCoroutine(ChangeColors());
+            StartCoroutine(PlayerHitCoroutine());
+            StartCoroutine(RecentlyHit());
+        }
+    }
+
+    IEnumerator RecentlyHit()
+    {
+        yield return new WaitForSeconds(0.4f);
+        recentlyHit = false;
+        yield return null;
     }
 
     IEnumerator PlayerHitCoroutine() {
         float move_Speed = playerMovement.move_Speed;
         playerMovement.move_Speed = 8;
         playerLives -= 1;
+        UIManager.instance.ChangeLives(playerLives);
         Debug.Log(playerLives);
         yield return new WaitForSeconds(1.5f);
         playerMovement.move_Speed = 15;

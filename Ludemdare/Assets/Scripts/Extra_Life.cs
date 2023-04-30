@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PowerUps/Extra_Life")]
 public class Extra_Life : PowerUpEffect
 {
-    public float num_lives = 1f;
+    public int num_lives = 1;
     public override void Apply(GameObject target)
     {
         if (target.tag == "Player")

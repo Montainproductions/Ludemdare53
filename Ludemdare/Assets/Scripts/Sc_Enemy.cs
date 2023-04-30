@@ -9,6 +9,7 @@ public class Sc_Enemy : MonoBehaviour
     private float speed;
 
     private GameObject player;
+    private PlayerDamage playerDamageScript;
 
     [SerializeField]
     private Transform walkingLocation;
@@ -16,6 +17,8 @@ public class Sc_Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerDamageScript = player.GetComponent<PlayerDamage>();
     }
 
     // Update is called once per frame
@@ -41,16 +44,17 @@ public class Sc_Enemy : MonoBehaviour
         toLocation = rotationRoute.transform.GetChild(currentRoute);
     }*/
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         //ebug.Log(collision);
         //Debug.Log(collision.tag);
-        if (collision.tag == "Player")
+        if (collision.gameObject.tag == "Player" && !playerDamageScript.recentlyHit)
         {
-            player.GetComponent<PlayerDamage>().PlayerHit();
-            Destroy(gameObject);
+            playerDamageScript.PlayerHit();
+            Destroy(this.gameObject);
+            Sc_AIDirector.Instance.EnemyDeid();
         }
-        else if (collision.tag == "Spawner")
+        else if (collision.gameObject.CompareTag("Spawner"))
         {
         }
     }

@@ -16,7 +16,7 @@ public class Sc_SpawnerTimer : MonoBehaviour
     public IEnumerator SpawnerUsed()
     {
         spawnerBeenUsed = true;
-        float timerWait = Random.Range(2.0f,4.0f);
+        float timerWait = Random.Range(1.0f,3.0f);
         yield return new WaitForSeconds(timerWait);
         spawnerBeenUsed = false;
         yield return null;
