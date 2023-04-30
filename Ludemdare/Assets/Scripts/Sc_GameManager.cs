@@ -45,12 +45,14 @@ public class Sc_GameManager : MonoBehaviour
     {
     }
 
-    public void StartGame()
+    public IEnumerator StartGame()
     {
+        yield return new WaitForSeconds(2);
         currentScene++;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentScene);
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(StartLevelTimer());
+        yield return null;
     }
 
     public void QuitGame()

@@ -1381,7 +1381,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a4a42d9ea934445932e3a44d0c26ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuButtons: []
+  mainMenuButtons:
+  - {fileID: 1657652063}
+  - {fileID: 2007537500}
+  - {fileID: 583037503}
   pauseMenuButtons: []
   levelSelectorMenu: []
   mainMenuOgTransform: []

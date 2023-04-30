@@ -70,10 +70,6 @@ public class Sc_CustomButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             StartCoroutine(menuAnimations.PauseMenuAnimation());
         }
-        else if (menuGroup == "Level Selector Menu")
-        {
-            StartCoroutine(menuAnimations.LevelMenuAnimation());
-        }
         OnEvent.Invoke();
         Debug.Log("UI Button Clicked");
     }
