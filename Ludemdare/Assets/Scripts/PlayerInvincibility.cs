@@ -8,14 +8,14 @@ public class PlayerInvincibility : MonoBehaviour
     // Start is called before the first frame update
  
 
-    public void OnCollisionEnter2D(Collision collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy")) 
         {
             if (invincibleEnabled == false) 
             {
-                Destroy(gameObject);
- 
+                //Destroy(gameObject);
+                Debug.Log("H");
             }
         }
     }

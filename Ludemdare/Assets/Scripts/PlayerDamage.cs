@@ -15,6 +15,7 @@ public class PlayerDamage : MonoBehaviour
     private Color newColour = Color.red;
     private Color oldColour = Color.white;
 
+    public float playerLives = 3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,10 @@ public class PlayerDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if (playerLives == 0f)
+        {
+            Debug.Log("Game Over");
+        }
     }
 
     public void PlayerHit()
@@ -38,6 +42,8 @@ public class PlayerDamage : MonoBehaviour
     IEnumerator PlayerHitCoroutine() {
         float move_Speed = playerMovement.move_Speed;
         playerMovement.move_Speed = 8;
+        playerLives -= 1;
+        Debug.Log(playerLives);
         yield return new WaitForSeconds(1.5f);
         playerMovement.move_Speed = 15;
         yield return null;
