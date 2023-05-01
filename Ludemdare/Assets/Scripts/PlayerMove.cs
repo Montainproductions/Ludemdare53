@@ -62,7 +62,7 @@ public class PlayerMove : MonoBehaviour {
 
     public void AddTime(float time_amount) 
     { 
-            timer.currentTime += time_amount;
+        timer.currentTime += time_amount;
     }
 
     public void PlayAudio(int i)

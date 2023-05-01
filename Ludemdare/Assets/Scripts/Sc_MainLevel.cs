@@ -7,7 +7,7 @@ public class Sc_MainLevel : MonoBehaviour
     public static Sc_MainLevel Instance { get; private set; }
 
     [SerializeField]
-    private GameObject tile;
+    private GameObject[] tile;
 
     [SerializeField]
     private GameObject[] currentNodes;
@@ -27,15 +27,10 @@ public class Sc_MainLevel : MonoBehaviour
         SpawnTile();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SpawnTile()
     {
-        GameObject newTile = Instantiate(tile, currentNodes[0].transform);
+        int tilePos = Random.Range(0, tile.Length);
+        GameObject newTile = Instantiate(tile[tilePos], currentNodes[0].transform);
         newTile.GetComponent<Sc_Tile>().walkingLocation = currentNodes[1].transform;
     }
 }

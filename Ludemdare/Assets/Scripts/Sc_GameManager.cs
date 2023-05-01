@@ -51,27 +51,11 @@ public class Sc_GameManager : MonoBehaviour
         currentScene++;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentScene);
         player = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(StartLevelTimer());
         yield return null;
     }
 
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    IEnumerator StartLevelTimer()
-    {
-        levelTime = maxTimeInLevel + (15 * currentScene);
-        yield return new WaitForSeconds(levelTime);
-        StartCoroutine(EndOfLevel());
-        yield return null;
-    }
-
-    IEnumerator EndOfLevel()
-    {
-
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentScene++);
-        yield return null;
     }
 }

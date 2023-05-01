@@ -52,7 +52,6 @@ public class Sc_Enemy : MonoBehaviour
         {
             playerDamageScript.PlayerHit();
             Destroy(this.gameObject);
-            Sc_AIDirector.Instance.EnemyDeid();
         }
         else if (collision.gameObject.CompareTag("Spawner"))
         {

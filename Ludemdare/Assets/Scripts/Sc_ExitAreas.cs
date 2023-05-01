@@ -8,7 +8,6 @@ public class Sc_ExitAreas : MonoBehaviour
     {
         if(collision.tag == "Enemy")
         {
-            Sc_AIDirector.Instance.EnemyDeid();
             Destroy(collision.gameObject);
         }
     }

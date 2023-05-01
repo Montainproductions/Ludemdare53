@@ -10,15 +10,23 @@ public class Timer : MonoBehaviour
     public int startMinutes;
     public Text currentTimeText;
 
+    private int currentLevel;
+
     // Start is called before the first frame update
     void Start()
     {
-        currentTime = startMinutes * 60; 
+        currentLevel = 0;
+        NewLevel();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(currentTime <= 0)
+        {
+            NewLevel();
+        }
+
         currentTime -= Time.deltaTime;
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
         Debug.Log(time);
@@ -36,6 +44,13 @@ public class Timer : MonoBehaviour
             Start();
             Debug.Log("Next level");
         }
+    }
+
+    public float NewLevel()
+    {
+        currentLevel++;
+        currentTime = startMinutes * 60 + 15 * currentLevel;
+        return currentTime;
     }
 
 }
