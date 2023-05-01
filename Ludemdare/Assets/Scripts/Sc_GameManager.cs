@@ -16,9 +16,13 @@ public class Sc_GameManager : MonoBehaviour
 
     private float tileDistanceFront, tileDistanceBack;
 
+    public GameObject Pause_Menu;
+
+    
+
     public void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
@@ -37,7 +41,20 @@ public class Sc_GameManager : MonoBehaviour
 
     public void StartGameMethod()
     {
-        StartCoroutine(StartGame());
+        if (Input.GetKeyDown("escape"))
+        {
+            PauseMenu();
+        }
+    }
+
+    public void PauseMenu()
+    {
+        Pause_Menu.SetActive(true);
+    }
+
+    public void ReturnToGame() 
+    {
+        Pause_Menu.SetActive(false);
     }
 
     public IEnumerator StartGame()
