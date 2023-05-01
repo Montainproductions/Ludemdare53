@@ -66,10 +66,6 @@ public class Sc_CustomButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             StartCoroutine(menuAnimations.MainMenuAnimation());
         }
-        else if (menuGroup == "Pause Menu")
-        {
-            StartCoroutine(menuAnimations.PauseMenuAnimation());
-        }
         OnEvent.Invoke();
         Debug.Log("UI Button Clicked");
     }

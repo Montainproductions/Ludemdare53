@@ -16,12 +16,15 @@ public class Extra_Life : PowerUpEffect
 
     public override void Apply(GameObject target)
     {
-        PlayerDamage dmg= target.GetComponent<PlayerDamage>();
         if (target.tag == "Player")
         {
-            dmg.playerLives += num_lives;
-            dmg.PlayAudio(0);
-            UIManager.instance.ChangeLives(dmg.playerLives);
+            PlayerDamage dmg = target.GetComponent<PlayerDamage>();
+            if (dmg.playerLives < 4)
+            {
+                dmg.playerLives += num_lives;
+                dmg.PlayAudio(0);
+                UIManager.instance.ChangeLives(dmg.playerLives);
+            }
         }
     }
 }

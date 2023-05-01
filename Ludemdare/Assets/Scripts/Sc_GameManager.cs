@@ -40,16 +40,16 @@ public class Sc_GameManager : MonoBehaviour
         currentScene = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartGameMethod()
     {
+        StartCoroutine(StartGame());
     }
 
     public IEnumerator StartGame()
     {
         yield return new WaitForSeconds(2);
         currentScene++;
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentScene);
+        SceneManager.LoadScene(currentScene);
         player = GameObject.FindGameObjectWithTag("Player");
         yield return null;
     }

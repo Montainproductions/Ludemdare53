@@ -22,16 +22,18 @@ public class UIManager : MonoBehaviour
 
     public void ChangeLives(int amount) 
     {
-        Debug.Log(amount);
-        for (int i = 0; i < 4; i++) 
+        if (amount <= 4)
         {
-            if (i < amount)
+            for (int i = 0; i < 4; i++)
             {
-                lives[i].SetActive(true);
-            }
-            else
-            {
-                lives[i].SetActive(false);
+                if (i < amount)
+                {
+                    lives[i].SetActive(true);
+                }
+                else
+                {
+                    lives[i].SetActive(false);
+                }
             }
         }
     }
