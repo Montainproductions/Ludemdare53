@@ -16,6 +16,12 @@ public class PlayerDamage : MonoBehaviour
     public bool recentlyHit;
 
     public int playerLives;
+
+    public PlayerInvincibility invincibility; 
+
+    public AudioSource src;
+    public AudioClip[] clip;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +40,7 @@ public class PlayerDamage : MonoBehaviour
 
     public void PlayerHit()
     {
-        if (!recentlyHit)
+        if (!recentlyHit && !invincibility.invincibleEnabled)
         {
             recentlyHit = true;
             StartCoroutine(ChangeColors());
@@ -66,5 +72,10 @@ public class PlayerDamage : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         rend.material.color = oldColour;
         yield return null;
+    }
+
+    public void PlayAudio(int i) 
+    {
+        src.PlayOneShot(clip[i]);
     }
 }

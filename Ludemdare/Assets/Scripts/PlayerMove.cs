@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour {
 
     public float move_Speed;
 
+    public AudioSource src;
+    public AudioClip[] clip;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,5 +58,10 @@ public class PlayerMove : MonoBehaviour {
         yield return new WaitForSeconds(3f);
         move_Speed = 15;
         yield return null;
+    }
+
+    public void PlayAudio(int i)
+    {
+        src.PlayOneShot(clip[i]);
     }
 }
