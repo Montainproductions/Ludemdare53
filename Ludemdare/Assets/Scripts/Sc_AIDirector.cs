@@ -12,7 +12,9 @@ public class Sc_AIDirector : MonoBehaviour
     [SerializeField]
     private GameObject[] enemyOptions;
     [SerializeField]
-    private GameObject[] spawnLocations;
+    private GameObject[] spawnLocations, warningSigns;
+
+
 
     private void Awake()
     {
@@ -71,7 +73,9 @@ public class Sc_AIDirector : MonoBehaviour
                 Transform location = spawnLocations[posToSpawn].transform;
                 StartCoroutine(spawnerTimer.SpawnerUsed());
                 StartCoroutine(oppositeTimer.SpawnerUsed());
-                //Debug.Log(posToSpawn);
+                warningSigns[posToSpawn].SetActive(true);
+                yield return new WaitForSeconds(1.2f);
+                warningSigns[posToSpawn].SetActive(false);
                 Instantiate(enemyOptions[enemyToSpawn], location.position, location.rotation);
             }
         }
@@ -85,7 +89,9 @@ public class Sc_AIDirector : MonoBehaviour
                 Transform location = spawnLocations[posToSpawn + 4].transform;
                 StartCoroutine(spawnerTimer.SpawnerUsed());
                 StartCoroutine(oppositeTimer.SpawnerUsed());
-                //Debug.Log(posToSpawn + 3);
+                warningSigns[posToSpawn + 4].SetActive(true);
+                yield return new WaitForSeconds(1.2f);
+                warningSigns[posToSpawn + 4].SetActive(false);
                 Instantiate(enemyOptions[enemyToSpawn], location.position, location.rotation);
             }
         }
@@ -97,7 +103,9 @@ public class Sc_AIDirector : MonoBehaviour
             {
                 Transform location = spawnLocations[posToSpawn + 6].transform;
                 StartCoroutine(spawnerTimer.SpawnerUsed());
-                //Debug.Log(posToSpawn + 6);
+                warningSigns[posToSpawn + 6].SetActive(true);
+                yield return new WaitForSeconds(1.2f);
+                warningSigns[posToSpawn + 6].SetActive(false);
                 Instantiate(enemyOptions[enemyToSpawn], location.position, location.rotation);
             }
         }
