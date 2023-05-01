@@ -6,17 +6,24 @@ using System;
 
 public class Timer : MonoBehaviour
 {
+    public static Timer Instance { get; private set; }
+
     public float currentTime;
     public int startMinutes;
     public Text currentTimeText;
 
-    private int currentLevel;
+    public int currentLevel;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         currentLevel = 0;
-        NewLevel();
+        currentTime = NewLevel();
     }
 
     // Update is called once per frame
@@ -24,7 +31,7 @@ public class Timer : MonoBehaviour
     {
         if(currentTime <= 0)
         {
-            NewLevel();
+            currentTime = NewLevel();
         }
 
         currentTime -= Time.deltaTime;
@@ -38,19 +45,22 @@ public class Timer : MonoBehaviour
         {
             currentTimeText.text = time.Minutes.ToString() + ":" + time.Seconds.ToString();
         }
-     
-        if (currentTime <= 0) 
-        {
-            Start();
-            Debug.Log("Next level");
-        }
     }
 
     public float NewLevel()
     {
+        if(currentLevel == 3)
+        {
+            EndGame();
+        }
         currentLevel++;
-        currentTime = startMinutes * 60 + 15 * currentLevel;
-        return currentTime;
+        float newLevelTime = startMinutes * 60 + 15 * currentLevel;
+        return newLevelTime;
+    }
+
+    public void EndGame()
+    {
+
     }
 
 }

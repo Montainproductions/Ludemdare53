@@ -7,7 +7,7 @@ public class Sc_AIDirector : MonoBehaviour
 {
     public static Sc_AIDirector Instance { get; private set; }
 
-    private int posToSpawn, currentLevel;
+    private int posToSpawn;
 
     [SerializeField]
     private GameObject[] enemyOptions;
@@ -35,7 +35,30 @@ public class Sc_AIDirector : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        int sideOfScreen = Random.Range(0, 2);
+        int sideOfScreen;
+        int enemyToSpawn;
+        if (Timer.Instance.currentLevel == 1)
+        {
+            enemyToSpawn = 0;
+            sideOfScreen = Random.Range(0, 1);
+        }
+        else if(Timer.Instance.currentLevel == 2)
+        {
+            enemyToSpawn = 1;
+            sideOfScreen = 2;
+        }
+        else
+        {
+            sideOfScreen = Random.Range(0, 2);
+            if(sideOfScreen < 2)
+            {
+                enemyToSpawn = 2;
+            }
+            else
+            {
+                enemyToSpawn = 3;
+            }
+        }
         Sc_SpawnerTimer spawnerTimer, oppositeTimer;
         //0,1,2, 3,4,5, 6,7, 8,9
         if (sideOfScreen == 0)
@@ -49,7 +72,7 @@ public class Sc_AIDirector : MonoBehaviour
                 StartCoroutine(spawnerTimer.SpawnerUsed());
                 StartCoroutine(oppositeTimer.SpawnerUsed());
                 //Debug.Log(posToSpawn);
-                Instantiate(enemyOptions[0], location.position, location.rotation);
+                Instantiate(enemyOptions[enemyToSpawn], location.position, location.rotation);
             }
         }
         else if (sideOfScreen == 1)
@@ -63,7 +86,7 @@ public class Sc_AIDirector : MonoBehaviour
                 StartCoroutine(spawnerTimer.SpawnerUsed());
                 StartCoroutine(oppositeTimer.SpawnerUsed());
                 //Debug.Log(posToSpawn + 3);
-                Instantiate(enemyOptions[0], location.position, location.rotation);
+                Instantiate(enemyOptions[enemyToSpawn], location.position, location.rotation);
             }
         }
         else if (sideOfScreen == 2)
@@ -75,7 +98,7 @@ public class Sc_AIDirector : MonoBehaviour
                 Transform location = spawnLocations[posToSpawn + 6].transform;
                 StartCoroutine(spawnerTimer.SpawnerUsed());
                 //Debug.Log(posToSpawn + 6);
-                Instantiate(enemyOptions[0], location.position, location.rotation);
+                Instantiate(enemyOptions[enemyToSpawn], location.position, location.rotation);
             }
         }
         yield return new WaitForSeconds(2);

@@ -1985,7 +1985,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 069b8b98b21991244bb1a3c1f6b5eab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemies: 4
   enemyOptions:
   - {fileID: 1574231046433977463, guid: 3eb0e533cc223ea4bb3533e73ef13896, type: 3}
   - {fileID: 8791318619164245664, guid: 6ab5ea3e30d81414d9ab3544d02f4359, type: 3}
