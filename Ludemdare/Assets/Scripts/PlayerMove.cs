@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour {
     private float vertical;
     private float moveLimiter = 0.7f;
 
-
+    public Timer timer;
     public float move_Speed;
 
     public AudioSource src;
@@ -58,6 +58,11 @@ public class PlayerMove : MonoBehaviour {
         yield return new WaitForSeconds(3f);
         move_Speed = 15;
         yield return null;
+    }
+
+    public void AddTime(float time_amount) 
+    { 
+            timer.currentTime += time_amount;
     }
 
     public void PlayAudio(int i)
