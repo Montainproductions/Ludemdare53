@@ -36,7 +36,7 @@ public class Timer : MonoBehaviour
 
         currentTime -= Time.deltaTime;
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
-        Debug.Log(time);
+        //Debug.Log(time);
         if (time.Seconds >= 0 && time.Seconds < 10)
         {
             currentTimeText.text = time.Minutes.ToString() + ":" + "0" + time.Seconds.ToString();

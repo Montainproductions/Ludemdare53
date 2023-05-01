@@ -6,11 +6,20 @@ using UnityEngine;
 public class PlayerInvincibility : MonoBehaviour
 {
     public bool invincibleEnabled = false;
+
     [SerializeField]
-    private float invincDuration = 3.0f;
-    // Start is called before the first frame update
+    private GameObject uiForInvic;
+
+    [SerializeField]
+    private float invincDuration = 4.0f;
+    
     public AudioSource src;
     public AudioClip[] clip;
+
+    private void Start()
+    {
+        uiForInvic.SetActive(false);
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,6 +35,8 @@ public class PlayerInvincibility : MonoBehaviour
     public void InvincEnabled() 
     { 
         invincibleEnabled = true;
+        uiForInvic.SetActive(true);
+        uiForInvic.GetComponent<Sc_InvisUI>().RestartValue();
         StartCoroutine(InvincDisableRoutine());
     }
 
@@ -33,6 +44,7 @@ public class PlayerInvincibility : MonoBehaviour
     {
         yield return new WaitForSeconds(invincDuration);
         invincibleEnabled = false;
+        uiForInvic.SetActive(false);
         yield return null;
     }
 
