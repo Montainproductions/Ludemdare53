@@ -34,7 +34,7 @@ public class PlayerDamage : MonoBehaviour
     {
         if (playerLives <= 0f)
         {
-            Debug.Log("Game Over");
+            Debug.Log("Game Over"); 
         }
     }
 
