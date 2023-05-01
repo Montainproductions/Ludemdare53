@@ -11,13 +11,8 @@ public class Sc_GameManager : MonoBehaviour
     [SerializeField]
     [Tooltip("In seconds")]
     private float maxTimeInLevel;
-    private float currentLevelTimer;
-
-    private float levelTime;
 
     private GameObject player;
-
-    private GameObject[] appearedTiles = new GameObject[3];
 
     private float tileDistanceFront, tileDistanceBack;
 

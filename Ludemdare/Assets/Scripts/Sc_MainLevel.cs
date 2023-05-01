@@ -12,6 +12,9 @@ public class Sc_MainLevel : MonoBehaviour
     [SerializeField]
     private GameObject[] currentNodes;
 
+    [SerializeField]
+    private GameObject[] powerUpTileSpawn, powerUps;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,12 @@ public class Sc_MainLevel : MonoBehaviour
         }
 
         SpawnTile();
+    }
+
+    public void SpawnPowerUp(int powerUpValue)
+    {
+        int spawnLocation = Random.Range(0, powerUpTileSpawn.Length);
+        Instantiate(powerUps[powerUpValue], powerUpTileSpawn[spawnLocation].transform);
     }
 
     public void SpawnTile()
