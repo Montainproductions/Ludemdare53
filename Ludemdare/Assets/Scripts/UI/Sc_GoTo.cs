@@ -5,9 +5,9 @@ using UnityEngine;
 public class Sc_GoTo : MonoBehaviour
 {
     [SerializeField]
-    private GameObject currentUI, targetUI, currentUIObj;
+    private GameObject[] currentUI;
     [SerializeField]
-    private Transform newCurrentUIPos, newTargetUIPos;
+    private Transform[] newCurrentUIPos;
 
     public void OnClick()
     {
@@ -17,8 +17,8 @@ public class Sc_GoTo : MonoBehaviour
     IEnumerator ActivateNewUI()
     {
         yield return new WaitForSeconds(1.1f);
-        currentUI.transform.position = newCurrentUIPos.position;
-        targetUI.transform.position = newTargetUIPos.position;
+        currentUI[0].transform.position = newCurrentUIPos[0].position;
+        currentUI[1].transform.position = newCurrentUIPos[1].position;
         yield return null;
     }
 }

@@ -23,15 +23,16 @@ public class Timer : MonoBehaviour
     void Start()
     {
         currentLevel = 0;
-        currentTime = NewLevel();
+        NewLevel();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Sc_GameManager.Instance.currentScene == 0) return;
         if(currentTime <= 0)
         {
-            currentTime = NewLevel();
+            Sc_UICanves.instance.PlayerWin();
         }
 
         currentTime -= Time.deltaTime;
@@ -55,15 +56,14 @@ public class Timer : MonoBehaviour
         }
     }
 
-    public float NewLevel()
+    public void NewLevel()
     {
         if(currentLevel == 3)
         {
             EndGame();
         }
         currentLevel++;
-        float newLevelTime = startMinutes * 60 + 15 * currentLevel;
-        return newLevelTime;
+        currentTime = startMinutes * 60 + 15 * currentLevel;
     }
 
     public void EndGame()

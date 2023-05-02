@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JoaquinRandomGen.unity
     guid: 9acfedcc1dadda84aa92598ac1aac4a4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PauseMenu.unity
     guid: fa86d184f31d22c47b60377d3df57ea2
   m_configObjects: {}

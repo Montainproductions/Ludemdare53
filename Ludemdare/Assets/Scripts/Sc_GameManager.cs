@@ -7,18 +7,19 @@ public class Sc_GameManager : MonoBehaviour
 {
     public static Sc_GameManager Instance { get; private set; }
 
-    private int currentLevel, currentScene;
+    [HideInInspector]
+    public int currentScene;
+
     [SerializeField]
     [Tooltip("In seconds")]
     private float maxTimeInLevel;
 
     private GameObject player;
 
-    private float tileDistanceFront, tileDistanceBack;
+    public GameObject mainMenu, mainGame, Pause_Menu;
+    private bool paused;
 
-    public GameObject Pause_Menu;
 
-    
 
     public void Awake()
     {
@@ -31,6 +32,8 @@ public class Sc_GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+
+        paused = false;
     }
 
     // Start is called before the first frame update
@@ -39,27 +42,61 @@ public class Sc_GameManager : MonoBehaviour
         currentScene = 0;
     }
 
-    public void StartGameMethod()
+    public void Update()
     {
-        if (Input.GetKeyDown("escape"))
+        if (currentScene == 0)
         {
+            mainMenu.SetActive(true);
+            mainGame.SetActive(false);
+            Pause_Menu.SetActive(false);
+        }
+        else if(currentScene != 0 && Input.GetKeyDown(KeyCode.Escape))
+        {
+            //mainMenu.SetActive(false);
             PauseMenu();
         }
+        else if (currentScene != 0)
+        {
+            mainMenu.SetActive(false);
+            mainGame.SetActive(true);
+        }
+        Debug.Log(currentScene);
+        
     }
 
     public void PauseMenu()
     {
-        Pause_Menu.SetActive(true);
+        Debug.Log("Pause");
+        paused = !paused;
+        Pause_Menu.SetActive(paused);
+        if (paused)
+        {
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+        }
     }
 
-    public void ReturnToGame() 
+    public void NextLevel()
     {
-        Pause_Menu.SetActive(false);
+        currentScene++;
+    }
+
+    public void MainMenu()
+    {
+        currentScene = 0;
+        SceneManager.LoadScene(currentScene); ;
+    }
+
+    public void StartGameMethod()
+    {
+        StartCoroutine(StartGame());
     }
 
     public IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(2);
         currentScene++;
         SceneManager.LoadScene(currentScene);
         player = GameObject.FindGameObjectWithTag("Player");

@@ -10,11 +10,9 @@ public class Sc_AIDirector : MonoBehaviour
     private int posToSpawn;
 
     [SerializeField]
-    private GameObject[] enemyOptions;
-    [SerializeField]
-    private GameObject[] spawnLocations, warningSigns;
+    private GameObject[] enemyOptions, spawnLocations;
 
-
+    private GameObject[] warningSigns;
 
     private void Awake()
     {
@@ -32,7 +30,18 @@ public class Sc_AIDirector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(GetWarningSigns());
         StartCoroutine(SpawnEnemy());
+    }
+
+    IEnumerator GetWarningSigns()
+    {
+        warningSigns = GameObject.FindGameObjectsWithTag("WarningSigns");
+        for(int i = 0; i < warningSigns.Length; i++)
+        {
+            warningSigns[i].SetActive(false);
+        }
+        yield return null;
     }
 
     IEnumerator SpawnEnemy()

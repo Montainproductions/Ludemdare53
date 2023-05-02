@@ -38,6 +38,11 @@ public class PlayerDamage : MonoBehaviour
         }
     }
 
+    public void PlayerDeath()
+    {
+        Sc_UICanves.instance.PlayerDeath();
+    }
+
     public void PlayerHit()
     {
         if (!recentlyHit && !invincibility.invincibleEnabled)
@@ -60,6 +65,10 @@ public class PlayerDamage : MonoBehaviour
         float move_Speed = playerMovement.move_Speed;
         playerMovement.move_Speed = 8;
         playerLives -= 1;
+        if(playerLives <= 0)
+        {
+            PlayerDeath();
+        }
         UIManager.instance.ChangeLives(playerLives);
         Debug.Log(playerLives);
         yield return new WaitForSeconds(1.5f);

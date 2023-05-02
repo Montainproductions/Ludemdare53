@@ -16,6 +16,11 @@ public class PlayerInvincibility : MonoBehaviour
     public AudioSource src;
     public AudioClip[] clip;
 
+    public void Awake()
+    {
+        uiForInvic = GameObject.FindGameObjectWithTag("uiInvic");
+    }
+
     private void Start()
     {
         uiForInvic.SetActive(false);

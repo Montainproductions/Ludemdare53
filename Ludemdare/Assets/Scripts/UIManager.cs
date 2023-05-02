@@ -9,11 +9,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject[] lives;
 
+    /*
     [SerializeField]
     private Transform lifeParent;
 
     [SerializeField]
-    private GameObject lifePrefab;
+    private GameObject lifePrefab;*/
 
     public void Awake()
     {
