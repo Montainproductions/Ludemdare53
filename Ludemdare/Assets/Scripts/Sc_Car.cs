@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEditor.FilePathAttribute;
 
 public class Sc_Car : MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class Sc_Car : MonoBehaviour
 
     private bool notStartedCrash;
 
-    private void Awake()
+    public void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
