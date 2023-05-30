@@ -6,17 +6,12 @@ public class Sc_MainLevel : MonoBehaviour
 {
     public static Sc_MainLevel Instance { get; private set; }
 
-    [SerializeField]
-    private GameObject[] tile;
+    private int currentLevel;
 
     [SerializeField]
-    private GameObject[] currentNodes;
+    private GameObject[] tile, currentNodes, powerUpTileSpawn, powerUps;
 
-    [SerializeField]
-    private GameObject[] powerUpTileSpawn, powerUps;
-
-    // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
         if (Instance == null)
         {
@@ -26,8 +21,13 @@ public class Sc_MainLevel : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
         SpawnTile();
+        NewLevel();
     }
 
     public void SpawnPowerUp(int powerUpValue)
@@ -41,5 +41,32 @@ public class Sc_MainLevel : MonoBehaviour
         int tilePos = Random.Range(0, tile.Length);
         GameObject newTile = Instantiate(tile[tilePos], currentNodes[0].transform);
         newTile.GetComponent<Sc_Tile>().walkingLocation = currentNodes[1].transform;
+    }
+
+    public void StartNewGame()
+    {
+        currentLevel = 0;
+        Timer.Instance.NewTime(currentLevel);
+    }
+
+    public void NewLevel()
+    {
+        if (currentLevel == 3)
+        {
+            EndGame();
+        }
+        currentLevel++;
+
+        Timer.Instance.NewTime(currentLevel);
+    }
+
+    public void EndGame()
+    {
+        Sc_UICanves.Instance.PlayerWin();
+    }
+
+    public int ReturnCurrentLevel()
+    {
+        return currentLevel;
     }
 }

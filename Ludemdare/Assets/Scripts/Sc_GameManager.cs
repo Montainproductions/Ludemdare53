@@ -92,6 +92,7 @@ public class Sc_GameManager : MonoBehaviour
 
     public void StartGameMethod()
     {
+        Sc_MainLevel.Instance.StartNewGame();
         StartCoroutine(StartGame());
     }
 

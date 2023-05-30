@@ -12,27 +12,26 @@ public class Timer : MonoBehaviour
     public int startMinutes;
     public Text currentTimeText;
 
-    public int currentLevel;
-
     private void Awake()
     {
-        Instance = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        currentLevel = 0;
-        NewLevel();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Sc_GameManager.Instance.currentScene == 0) return;
+
         if(currentTime <= 0)
         {
-            Sc_UICanves.instance.PlayerWin();
+            Sc_MainLevel.Instance.NewLevel();
         }
 
         currentTime -= Time.deltaTime;
@@ -56,19 +55,8 @@ public class Timer : MonoBehaviour
         }
     }
 
-    public void NewLevel()
+    public void NewTime(int currentLevelInt)
     {
-        if(currentLevel == 3)
-        {
-            EndGame();
-        }
-        currentLevel++;
-        currentTime = startMinutes * 60 + 15 * currentLevel;
+        currentTime = startMinutes * 60 + 15 * currentLevelInt;
     }
-
-    public void EndGame()
-    {
-
-    }
-
 }

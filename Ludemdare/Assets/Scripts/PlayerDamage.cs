@@ -40,7 +40,7 @@ public class PlayerDamage : MonoBehaviour
 
     public void PlayerDeath()
     {
-        Sc_UICanves.instance.PlayerDeath();
+        Sc_UICanves.Instance.PlayerDeath();
     }
 
     public void PlayerHit()

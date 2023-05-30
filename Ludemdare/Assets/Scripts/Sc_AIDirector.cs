@@ -10,9 +10,7 @@ public class Sc_AIDirector : MonoBehaviour
     private int posToSpawn;
 
     [SerializeField]
-    private GameObject[] enemyOptions, spawnLocations;
-
-    private GameObject[] warningSigns;
+    private GameObject[] enemyOptions, spawnLocations, warningSigns;
 
     private void Awake()
     {
@@ -30,30 +28,19 @@ public class Sc_AIDirector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(GetWarningSigns());
         StartCoroutine(SpawnEnemy());
-    }
-
-    IEnumerator GetWarningSigns()
-    {
-        warningSigns = GameObject.FindGameObjectsWithTag("WarningSigns");
-        for(int i = 0; i < warningSigns.Length; i++)
-        {
-            warningSigns[i].SetActive(false);
-        }
-        yield return null;
     }
 
     IEnumerator SpawnEnemy()
     {
         int sideOfScreen;
         int enemyToSpawn;
-        if (Timer.Instance.currentLevel == 1)
+        if (Sc_MainLevel.Instance.ReturnCurrentLevel() == 1)
         {
             enemyToSpawn = 0;
             sideOfScreen = Random.Range(0, 1);
         }
-        else if(Timer.Instance.currentLevel == 2)
+        else if(Sc_MainLevel.Instance.ReturnCurrentLevel() == 2)
         {
             enemyToSpawn = 1;
             sideOfScreen = 2;
@@ -71,7 +58,7 @@ public class Sc_AIDirector : MonoBehaviour
             }
         }
         Sc_SpawnerTimer spawnerTimer, oppositeTimer;
-        //0,1,2, 3,4,5, 6,7, 8,9
+        //0,1,2, 3,4,5, 6,7,
         if (sideOfScreen == 0)
         {
             posToSpawn = Random.Range(0, 2);

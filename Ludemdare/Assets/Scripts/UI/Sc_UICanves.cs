@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Sc_UICanves : MonoBehaviour
 {
-    public static Sc_UICanves instance { get; private set; }
+    public static Sc_UICanves Instance { get; private set; }
 
     [SerializeField]
     private GameObject loseScreen, winScreen;
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
@@ -36,5 +36,11 @@ public class Sc_UICanves : MonoBehaviour
     public void PlayerDeath()
     {
         loseScreen.SetActive(true);
+    }
+
+    public void RestartLevel()
+    {
+        loseScreen.SetActive(false);
+        Sc_MainLevel.Instance.StartNewGame();
     }
 }
